@@ -2,12 +2,6 @@ import pandas as pd
 import numpy as np
 import math
 
-# Find max possible threshold 
-
-dataframe = pd.read_csv("data.csv")
-
-close = dataframe["Close"]
-
 # gets upper bound for the threshold 
 def get_upper_threshold(close):
     difference = close.diff()
@@ -35,7 +29,7 @@ def get_entropy(labels, base=None):
   base = math.e if base is None else base
   return -(vc * np.log(vc)/np.log(base)).sum()
 
-
+# get best threshold 
 def get_threshold(close):
     difference = close.diff()
     difference = difference.drop(0)
@@ -62,6 +56,6 @@ def get_threshold(close):
         temp_thres = temp_thres + 0.00001
     return threshold
 
-print(get_upper_threshold(close))
-print(get_threshold(close))
-        
+if __name__ == "main":
+    dataframe = pd.read_csv("data.csv")
+    close = dataframe["Close"]

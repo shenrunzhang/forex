@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from pandas import read_csv
+import pandas as pd
 import math
 import tensorflow as tf
 from tensorflow import keras
@@ -9,6 +10,7 @@ from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
+from Threshold import get_threshold
 
 MODEL = 'usdcadmodel'
 DATA = 'data.csv'
@@ -65,6 +67,36 @@ testPredict = inverse_transform(testPredict)
 trainY = inverse_transform(trainY)
 testY = inverse_transform(testY)
 
+print(testY)
+print(testPredict)
+threshold = get_threshold(dataframe["Close"])
+def decision(diff):    
+    if diff > threshold:
+        return "I"
+    if -diff > threshold:
+        return "D"
+    else:
+        return "N"
+
+def union(a, b):
+    if a == "I" and b == "I":
+        return "C"
+    if a == "D" and b == "D":
+        return "C"
+    if a == "N" or b == "N":
+        return "N"
+    else: return "F"
+
+table = pd.DataFrame([testY,testPredict]).transpose()
+table.columns = ["actual","predict"]
+table["p-a"] = table.predict - table.actual
+table["decision"] = table["p-a"].apply(decision)
+table["correct"] = table["actual"].diff().shift(-1).apply(lambda x: "I" if x > 0 else "D" if x < 0 else "N")
+table["union"] = table.apply(lambda x: union(x["decision"], x["correct"]), axis = 1)
+counts = table["union"].value_counts()
+frequency = table["union"].value_counts(normalize=True)
+print(pd.DataFrame({"counts": counts, "frequency": frequency}))
+
 # shift predictions up by one
 testPredict = np.delete(testPredict, -1)
 testY = np.delete(testY, 0)
@@ -75,4 +107,5 @@ plt.plot(testY, color="red")
 plt.show()
 testScore = np.sqrt(mean_squared_error(testY, testPredict))
 print('Test Score: %.2f RMSE' % (testScore))
+
 
