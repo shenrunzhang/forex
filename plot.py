@@ -67,8 +67,7 @@ testPredict = inverse_transform(testPredict)
 trainY = inverse_transform(trainY)
 testY = inverse_transform(testY)
 
-print(testY)
-print(testPredict)
+# threshold and make decisions
 threshold = get_threshold(dataframe["Close"])
 def decision(diff):    
     if diff > threshold:
@@ -107,5 +106,3 @@ plt.plot(testY, color="red")
 plt.show()
 testScore = np.sqrt(mean_squared_error(testY, testPredict))
 print('Test Score: %.2f RMSE' % (testScore))
-
-

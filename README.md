@@ -8,6 +8,10 @@ lstm.py - Takes what applyindicators.py outputted and trains a lstm model, then 
 
 plot.py - Runs predictions from a saved model. 
 
+Threshold.py - has function get_threshold() to get best threshold when given pandas dataframe of closing prices
+
+
+
 ## Debug
 
 I always get an import error when following tensorflow tutorials. To fix it I changed 
