@@ -7,3 +7,19 @@ applyindicators.py - Applies 8 different technical indicators to raw data, and o
 lstm.py - Takes what applyindicators.py outputted and trains a lstm model, then saves the model into mymodel file. 
 
 plot.py - Runs predictions from a saved model. 
+
+## Debug
+
+I always get an import error when following tensorflow tutorials. To fix it I changed 
+```
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import LSTM
+```
+to 
+```
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.layers import LSTM
+```
+So if you are encountering something similar you can try to change it back. 
