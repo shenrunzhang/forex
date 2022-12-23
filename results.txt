@@ -1,0 +1,16 @@
+Model prediction results:
+
+- EURUSD
+
+    - Technical 
+        C     214   0.380107
+        F     209   0.371226
+        N     140   0.248668
+    - Fundamental
+        C     282   0.356511
+        F     262   0.331226
+        N     247   0.312263
+    -Hybrid
+        C     235   0.417407
+        F     223   0.396092
+        N     105   0.186501

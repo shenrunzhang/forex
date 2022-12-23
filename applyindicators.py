@@ -7,11 +7,12 @@ import pandas as pd
 # BB with period of 20
 # CCI with a period of 20
 
-df = pd.read_csv(r'C:\Users\Shen\Documents\forex\usdcad1d.csv')
+df = pd.read_csv(
+    r'E:\PC_nou\trading_ai\forex_shenny\forex\fundamental_data\EURUSD_Candlestick_1_D_BID_01.01.2012-10.12.2022.csv')
 
 data = pd.DataFrame
 
-data= df[['Close']].copy()
+data = df[['Close']].copy()
 
 # Add moving average, window = 10
 data['MA10'] = df['Close'].rolling(10).mean()
@@ -24,23 +25,29 @@ data['MACD'] = macd
 
 # Add ROC, period = 2
 n_steps = 2
+
+
 def my_fun(x):
     return (x.iloc[-1] - x.iloc[0]) / x.iloc[0]
+
 
 data['ROC'] = data['Close'].rolling(n_steps).apply(my_fun)
 
 # Add Momentum, period = 4
 n_steps = 4
+
+
 def my_fun(x):
     return (x.iloc[-1] - x.iloc[0])
+
 
 data['Momentum'] = data['Close'].rolling(n_steps).apply(my_fun)
 
 # Add RSI
-## get the price diff
+# get the price diff
 delta = data['Close'].diff()
 
-## positive gains (up) and negative gains (down) Series
+# positive gains (up) and negative gains (down) Series
 up, down = delta.copy(), delta.copy()
 up[up < 0] = 0
 down[down > 0] = 0
@@ -64,9 +71,9 @@ data['BOLD'] = ma_tp - 2*std
 # Add CCI Commodity channel index, period = 20
 tp_rolling = typical_price.rolling(20)
 
-# calculate mean deviation 
+# calculate mean deviation
 mad = tp_rolling.apply(lambda s: abs(s - s.mean()).mean(), raw=True)
 
 data["CCI"] = (typical_price - tp_rolling.mean()) / (0.015 * mad)
 
-data.to_csv('data.csv')
+data.to_csv('technical_data_eurusd2.csv')
