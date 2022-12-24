@@ -4,10 +4,10 @@ from pandas import read_csv
 import math
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from tensorflow.keras.layers import Dropout
-from tensorflow.keras.layers import LSTM
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.layers import Dropout
+from tensorflow.python.keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 

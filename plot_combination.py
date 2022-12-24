@@ -76,8 +76,8 @@ testPredict_f = np.squeeze(testPredict_f)
 # Inverse scale the data
 
 def inverse_transform(arr):
-    print(arr.shape)
-    extended = np.zeros((len(arr), 16))
+    num_cols_full_dataset = 16
+    extended = np.zeros((len(arr), num_cols_full_dataset))
     extended[:, 0] = arr
     return scaler.inverse_transform(extended)[:, 0]
 

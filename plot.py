@@ -12,8 +12,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 from Threshold import get_threshold
 
-MODEL = 'ME_TI_LSTM_eurusd.h5'
-DATA = 'technical+fundamental_data_eurusd.csv'
+MODEL = 'prob_model.h5'
+DATA = r'C:\Users\Shen\Documents\forex\technical_data_eurusd2.csv'
 
 dataframe = read_csv(DATA, engine='python')
 dataset = dataframe.values
