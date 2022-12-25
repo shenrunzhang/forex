@@ -66,7 +66,8 @@ _, f_testX, _ = train_test_split(dataset_f)
 
 model_t = tf.keras.models.load_model(MODEL_T)
 model_f = tf.keras.models.load_model(MODEL_F)
-
+print(t_testX[0:5])
+print(t_testX.shape)
 testPredict_t = model_t.predict(t_testX)
 testPredict_t = np.squeeze(testPredict_t)
 
@@ -88,7 +89,7 @@ print("testPredict shape", testPredict_f.shape)
 testY = inverse_transform(testY)
 
 # threshold and make decisions
-threshold = get_threshold(dataframe["Close"])
+threshold = get_threshold(dataframe["Close"]) * 3
 
 
 def decision(diff):
@@ -109,15 +110,19 @@ def union(a, b):
     else:
         return "F"
     
-def combination(t_decision, f_decision, t_loss, f_loss):
+def combination(t_decision, f_decision, t_diff, f_diff, t_loss, f_loss):
     if t_decision == "N" or f_decision == "N":
         return "N"
     if t_decision == f_decision:
         return t_decision
     else:
-        # if predictions are different then 
-        # preference is given to the model that was most 
-        # correct (closest to actual) in the last time step
+        # # if conflict, return lowest change
+        # if abs(t_diff) > abs(f_diff):
+        #     return f_decision
+        # else: 
+        #     return t_decision
+        
+        # if conflict, return lowest loss in previous step
         if np.isnan(t_loss) or np.isnan(f_loss):
             return t_decision
         if abs(t_loss) == abs(f_loss):
@@ -138,10 +143,12 @@ table["t union"] = table.apply(lambda x: union(
     x["t decision"], x["correct"]), axis=1)
 table["f union"] = table.apply(lambda x: union(
     x["f decision"], x["correct"]), axis=1)
-table["t loss"] = (table.technical - table.actual).shift(1)
-table["f loss"] = (table.fundamental - table.actual).shift(1)
+table["t loss"] = table.technical.shift(1) - table.actual
+table["f loss"] = table.fundamental.shift(1) - table.actual
+table["t diff"] = table.technical - table.actual
+table["f diff"] = table.fundamental - table.actual
 table["combination"]  = table.apply(lambda x: combination(
-    x["t decision"], x["f decision"], x["t loss"], x["f loss"]), axis=1)
+    x["t decision"], x["f decision"], x["t diff"], x["f diff"], x["t loss"], x["f loss"]), axis=1)
 
 table["union"] = table.apply(lambda x: union(
     x["combination"], x["correct"]), axis=1)

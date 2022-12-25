@@ -6,11 +6,61 @@ Model prediction results:
         C     214   0.380107
         F     209   0.371226
         N     140   0.248668
+        C% = 0.5059
+    - Technical, threshold * 3
+        N     367   0.651865
+        C     102   0.181172
+        F      94   0.166963
+        C% = 0.5204
     - Fundamental
         C     282   0.356511
         F     262   0.331226
         N     247   0.312263
+        C% = 0.5183
+    - Fundamental, threshold * 3
+        C     240   0.426288
+        F     234   0.415631
+        N      89   0.158082
+        C% = 0.5063
     -Hybrid
         C     235   0.417407
         F     223   0.396092
         N     105   0.186501
+    - Combination (if conflict, choose model with lowest loss last time step)
+        C     210   0.373002
+        F     196   0.348135
+        N     157   0.278863
+        C% = 0.5172
+    - Combination (if conflict, don't take action)
+        N     468   0.831261
+        C      49   0.087034
+        F      46   0.081705
+        C% = 0.5157
+    - Combination (if conflict, return technical)
+        C     206   0.365897
+        F     200   0.355240
+        N     157   0.278863
+    - Combination (if conflict, return fundamental)
+        F     203   0.360568
+        C     203   0.360568
+        N     157   0.278863
+
+    - Combination (if conflict, return model with largest change in predicted values)
+        F     208   0.369449
+        C     198   0.351687
+        N     157   0.278863
+    - Combination (if conflict, return model with smallest change in predicted values)
+        C     211   0.374778
+        F     195   0.346359
+        N     157   0.278863
+        C% = 0.5197
+    - ***Combination (if conflict, return model with smallest change in predicted values), threshold * 3
+        N     438   0.777975
+        C      72   0.127886
+        F      53   0.094139
+        C% = 0.576
+    - Combination (if conflict, choose model with lowest loss last time step), threshold * 3
+        N     438   0.777975
+        C      70   0.124334
+        F      55   0.097691
+        C% = 0.56
