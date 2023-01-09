@@ -10,6 +10,24 @@ plot.py - Runs predictions from a saved model.
 
 Threshold.py - has function get_threshold() to get best threshold when given pandas dataframe of closing prices
 
+## Apply Indicators
+
+In day trading, technical indiactors are mathematically derived patterns based on historical price data that are used to determine whether a stock or currency pair is over or under bought. They are used alongside financial indicators to tell whether to buy or sell at any point. 
+
+In our technical model, 7 different technical indicators are used along with the closing price as the training dataset. 
+
+* MA with a period of 10
+* MACD with short- and long-term periods of 12 and 26, respectively
+* ROC with a period of 2
+* Momentum with a period of 4
+* RSI with a period of 10
+* BB with period of 20
+* CCI with a period of 20
+
+To derive these indicators, we start with the Opening, High, Low and Closing price data.
+
+
+
 
 
 ## Debug
