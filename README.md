@@ -58,21 +58,22 @@ If both models predict a price increase, then the final model predicts a price i
 
 This table shows the prediction results of the ensemble model for various experiments conducted with different thresholds and ways of picking a decision if the two models are in conflict. The models were tested over 500 days of data (500 data points) for the EURUSD currency pair. 
 
-| Experiment | Correct Decisions (C) | False Actions (F) | No Decisions (N) | Correct Decisions (%) |
+| Experiment | Correct Decisions (C) | False Decisions (F) | No Decisions (N) | Correct Decisions (%) |
 |------------|----------------------|--------------------|--------------------|-------------------------|
 | Technical | 214 | 209 | 140 | 50.59% |
 | Technical, threshold x3 | 102 | 94 | 367 | 52.04% |
 | Fundamental | 282 | 262 | 247 | 51.83% |
 | Fundamental, threshold x3 | 240 | 234 | 89 | 50.63% |
-| Hybrid | 235 | 223 | 105 | -- |
+| Hybrid | 235 | 223 | 105 | 51.28% |
 | Combination (Lowest Loss) | 210 | 196 | 157 | 51.72% |
 | Combination (No Action) | 49 | 46 | 468 | 51.57% |
-| Combination (Return Technical) | 206 | 200 | 157 | -- |
-| Combination (Return Fundamental) | 203 | 203 | 157 | -- |
-| Combination (Largest Change) | 198 | 208 | 157 | -- |
-| Combination (Smallest Change) | 211 | 195 | 157 | 51.97% |
+| Combination (Return Technical) | 206 | 200 | 157 | 50.78% |
+| Combination (Return Fundamental) | 203 | 203 | 157 | 50% |
+| Combination (Largest Change) | 198 | 208 | 157 | 48.81% |
+| Combination (Smallest Change) | 211 | 195 | 157 | 52.01% |
 | Combination (Smallest Change, threshold x3) | 72 | 53 | 438 | 57.6% |
 | Combination (Lowest Loss, threshold x3) | 70 | 55 | 438 | 56% |
+
 
 
 ## File descriptions
