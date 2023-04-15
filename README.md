@@ -30,14 +30,11 @@ The macroeconomic LSTM model utilizes several financial factors, including inter
 
 ## Prediction Graphs
 The following two graphs show the predicted and actual price movements of the EUR/USD currency pair over 500 time steps (days) for the fundamental and technical models respectively.
-<div style="display:flex;flex-wrap:wrap;">
-  <div style="flex:50%;padding:5px;">
-    <img src="graphs_results/Figure_6_fundamental.png" alt="Fundamental Analysis" style="width:100%">
-  </div>
-  <div style="flex:50%;padding:5px;">
-    <img src="graphs_results/Figure_5_hybrid.png" alt="Technical Analysis" style="width:100%">
-  </div>
-</div>
+| Fundamental Analysis | Technical Analysis |
+|----------------------|-------------------|
+| ![Fundamental Analysis](graphs_results/Figure_6_fundamental.png "Fundamental Analysis") | ![Technical Analysis](graphs_results/Figure_5_hybrid.png "Technical Analysis") |
+
+
 The models generate predictions for the price, and then the prediction of each model is put into one of three classes: price increase, price decrease, no action. If the prediction of a model is makes the price increase above a threshold, the decision output will be price increase, if it is below a threshold then the decision will be price decrease. If the change is within the threshold, then no action will be taken. 
 
 To determine the threshold τ for generating the no-action class, we used a two-phase approach. First, we performed histogram analysis on the closing prices of the EUR/USD pair to determine the upper bound of the threshold value. The upper bound was calculated as the value larger than 85% of the differences between two consecutive days' closing values. Second, we determined the final threshold value τ that maximizes entropy by iterating over potential threshold values with increments of 0.00001 up until the upper bound of the threshold found in the histogram analysis. The entropy value is calculated for each distribution of increases, decreases, and no-change values, and the distribution that gives the best entropy is used to determine the increase, decrease, and no-change classes.
@@ -59,23 +56,23 @@ If both models predict a price increase, then the final model predicts a price i
 
 ## Ensemble Model Prediction Results
 
-This table shows the prediction results of the ensemble model for various experiments conducted with different thresholds and ways of picking a decision if the two models are in conflict. Averaging the two models into a hybrid was also tested. The models were tested over 500 days of data (500 data points) for the EURUSD currency pair. 
-| Experiment | Correct Decisions (C) | False Decisions (F) | No Decisions (N) | Correct Decisions (%) |
+This table shows the prediction results of the ensemble model for various experiments conducted with different thresholds and ways of picking a decision if the two models are in conflict. The models were tested over 500 days of data (500 data points) for the EURUSD currency pair. 
+
+| Experiment | Correct Decisions (C) | False Actions (F) | No Decisions (N) | Correct Decisions (%) |
 |------------|----------------------|--------------------|--------------------|-------------------------|
 | Technical | 214 | 209 | 140 | 50.59% |
 | Technical, threshold x3 | 102 | 94 | 367 | 52.04% |
 | Fundamental | 282 | 262 | 247 | 51.83% |
 | Fundamental, threshold x3 | 240 | 234 | 89 | 50.63% |
-| Hybrid | 235 | 223 | 105 | 51.28% |
+| Hybrid | 235 | 223 | 105 | -- |
 | Combination (Lowest Loss) | 210 | 196 | 157 | 51.72% |
 | Combination (No Action) | 49 | 46 | 468 | 51.57% |
-| Combination (Return Technical) | 206 | 200 | 157 | 50.78% |
-| Combination (Return Fundamental) | 203 | 203 | 157 | 50% |
-| Combination (Largest Change) | 198 | 208 | 157 | 48.81% |
-| Combination (Smallest Change) | 211 | 195 | 157 | 52.01% |
+| Combination (Return Technical) | 206 | 200 | 157 | -- |
+| Combination (Return Fundamental) | 203 | 203 | 157 | -- |
+| Combination (Largest Change) | 198 | 208 | 157 | -- |
+| Combination (Smallest Change) | 211 | 195 | 157 | 51.97% |
 | Combination (Smallest Change, threshold x3) | 72 | 53 | 438 | 57.6% |
 | Combination (Lowest Loss, threshold x3) | 70 | 55 | 438 | 56% |
-
 
 
 ## File descriptions
