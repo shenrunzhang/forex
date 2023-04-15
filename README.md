@@ -3,7 +3,7 @@
 This project is a custom implementation of the paper [Forecasting directional movement of Forex data using LSTM with technical and macroeconomic indicators](https://jfin-swufe.springeropen.com/articles/10.1186/s40854-020-00220-2) with improvements.
 
 
-In this project, ensemble of two LSTM models is implemented to predict the directional movement of the EUR/USD currency pair. The models are trained on historical data of the EUR/USD price pairs. The ensemble model was able to achieve a profitibility of 58%, or of making the correct decision (to buy or sell) in 58% of decisions made when testing on unseen price data. 
+In this project, ensemble of two LSTM models is implemented to predict the directional movement of the EUR/USD currency pair. The models are trained on historical data of the EUR/USD price pairs. The ensemble model was able to achieve a profitibility of 58%, being able to make the correct decision (to buy or sell) in 58% of decisions made when testing on unseen price data. 
 
 # Models and Data
 
@@ -75,7 +75,6 @@ This table shows the prediction results of the ensemble model for various experi
 | Combination (Lowest Loss, threshold x3) | 70 | 55 | 438 | 56% |
 
 
-
 ## File descriptions
 
 applyindicators.py - Applies 8 different technical indicators to raw data, and outputs data.csv. Note that the first few lines of the output file will have some NaN values some indicators require a few time steps before starting.
@@ -101,3 +100,7 @@ from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import LSTM
 ```
 So if you are encountering something similar you can try to change it back. 
+
+## Citations
+- Yıldırım, D. C., Toroslu, I. H., & Fiore, U. (2021). Forecasting directional movement of Forex data using LSTM with technical and macroeconomic indicators. Financial Innovation, 7(1), 1-36. https://doi.org/10.1186/s40854-020-00220-2
+- Dukascopy website: https://www.dukascopy.com/swiss/english/marketwatch/historical/
